@@ -281,32 +281,3 @@ function startGame(timeLeft) {
         }, 1000);
     }
 }
-
-// This is depracated code from the removed tracking and scoring players capability
-// var playerCount = 0;
-// var playerList = [];
-
-// function Player(name, id, score, scoreId) {
-//     this.name = name;
-//     this.id = "player" + id + "Name";
-//     this.score = score;
-//     this.scoreId = "player" + scoreId + "Score";
-// }
-
-// function addPlayer() {
-//     playerCount++;
-
-//     // error checking
-//     var playerName = prompt("Enter Player Name");
-//     while(playerName === "") {
-//         playerName = prompt("Please Enter A Player Name");
-//     }
-
-//     var currentPlayer = new Player(playerName, playerCount, 0, playerCount);
-//     playerList.push(currentPlayer);
-  
-//     // this is replacing the text on the screen with the inputs and making them visible
-//     document.getElementById(currentPlayer.id).innerHTML = playerName;
-//     document.getElementById(currentPlayer.id).className = "show";
-//     document.getElementById(currentPlayer.scoreId).className = "show";
-// }

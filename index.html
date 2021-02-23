@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scattergories Game</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="scripts.js"></script>    
+  <script>initializeCategoryArray();</script>
+</head>
+<body>
+  <div class="wrapper">  
+    <div class="play-background">
+      <main>       
+        <div class="playarea">
+          <div class="info">
+            <div class="letter-wrap">
+              <div class="info-heading">
+                <p class="info-title">Letter</p>
+                <p class="roll"><a href="javascript:void(0)" onClick="generateLetter('letter');">Roll</a></p>
+              </div>
+              <div class="symbol-wrap">
+                <h2 id="letter" class="letter">?</h2>
+              </div>
+            </div>
+            <div class="sec1">
+              <div class="countdown-wrap">
+                <div class="info-heading">
+                  <p class="info-title">Time</p>
+                  <p class="countdown-set"><a href="javascript:void(0)" id="timer-set" onClick="setTimer(120);">Set</a></p>
+                </div>
+                <div class="timer-wrap">
+                  <h2 id="countdown" class="countdown">120</h2>
+                </div>
+              </div>
+              <div class="play-wrap">
+                <h2 id="play" class="play"><a href="javascript:void(0)" id="play-stop" onClick="startGame(119);">Play</a></h2>
+              </div>
+            </div>             
+          </div>
+          <div class="categories">
+            <ol>
+              <li id="cat1">CATEGORY</li>
+              <li id="cat2">CATEGORY</li>
+              <li id="cat3">CATEGORY</li>
+              <li id="cat4">CATEGORY</li>
+              <li id="cat5">CATEGORY</li>
+              <li id="cat6">CATEGORY</li>
+              <li id="cat7">CATEGORY</li>
+              <li id="cat8">CATEGORY</li>
+              <li id="cat9">CATEGORY</li>
+              <li id="cat10">CATEGORY</li>
+              <li id="cat11">CATEGORY</li>
+              <li id="cat12">CATEGORY</li>
+            </ol>
+          </div>   
+          <div class="reset">
+            <h2 class="reset-link"><a href="javascript:void(0)" onClick="reset();">Reset</a></h2>
+          </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

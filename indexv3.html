@@ -7,7 +7,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
   <link rel="stylesheet" type="text/css" href="styles.css">
-  
+  <script src='https://code.jquery.com/jquery-3.5.1.min.js' crossorigin='anonymous'></script>
+  <script src="scripts.js"></script>    
+  <script>initializeCategoryArray();</script>
 </head>
 <body>
   <div class="wrapper">  
@@ -18,7 +20,7 @@
             <div class="letter-wrap">
               <div class="info-heading">
                 <p class="info-title">Letter</p>
-                <p class="roll" id="roll">Roll</p>
+                <p class="roll"><a href="javascript:void(0)" onClick="generateLetter('letter');">Roll</a></p>
               </div>
               <div class="symbol-wrap">
                 <h2 id="letter" class="letter">?</h2>
@@ -28,14 +30,14 @@
               <div class="countdown-wrap">
                 <div class="info-heading">
                   <p class="info-title">Time</p>
-                  <p class="countdown-set"><i class="fas fa-angle-double-up time-up"></i>   <i class="fas fa-angle-double-down time-down"></i></p>
+                  <p class="countdown-set"><a href="javascript:void(0)" id="timer-set" onClick="setTimer(120);">Set</a></p>
                 </div>
                 <div class="timer-wrap">
-                  <h2 id="countdown" class="countdown"></h2>
+                  <h2 id="countdown" class="countdown">120</h2>
                 </div>
               </div>
               <div class="play-wrap">
-                <h2 id="play" class="play">Play</h2>
+                <h2 id="play" class="play"><a href="javascript:void(0)" id="play-stop" onClick="startGame(119);">Play</a></h2>
               </div>
             </div>             
           </div>
@@ -56,13 +58,10 @@
             </ol>
           </div>   
           <div class="reset">
-            <h2 class="reset-link">Reset</h2>
+            <h2 class="reset-link"><a href="javascript:void(0)" onClick="reset();">Reset</a></h2>
           </div>
       </main>
     </div>
   </div>
-  <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
-  <script src="https://kit.fontawesome.com/7627ee882a.js" crossorigin="anonymous"></script>
-  <script src="scripts.js"></script> 
 </body>
 </html>

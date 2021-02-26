@@ -1,33 +1,49 @@
-// Declaring the game counter
-var timesClicked = 0;
-// Declaring the letters to roll
-var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+// namespace
+const app = {};
 
-var categories;
+// letters and categories initialize
+app.letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+app.categories;
 
-// Purpose: to generate a letter for next game
-function generateLetter(eId) {
-    var letIndex = Math.floor(Math.random() * letters.length);
-    var letter = letters[letIndex];
-    document.getElementById(eId).innerHTML = letter;
-    setTimer(120);
+// global variables
+app.categoriesLeft;
+app.timerStop = false;
+app.gameLive = false;
+app.timer;
+app.time = 10;
+app.letterRolled = false;
+
+// cache selectors
+app.$roll = $('#roll');
+app.$timerSet = $('#timer-set');
+app.$countdown = $('#countdown');
+app.$letter = $('#letter');
+app.$category1 = $('#cat1');
+app.$play = $('#play');
+app.$reset = $('#reset-link');
+
+// adding the time to the page
+app.$countdown.text(app.time);
+
+// generate a letter for the game
+app.generateLetter = () => {
+    // retrieve a letter from the letters array
+    let index = Math.floor(Math.random() * app.letters.length);
+    let letterDisplayed = app.letters[index];
+    // return the letter to the page
+    app.$letter.text(letterDisplayed);
+    // change letter rolled flag
+    app.letterRolled = true;
 }
 
-// Purpose: to reset the game board
-function reset() {
-    document.getElementById("letter").innerHTML = "?";
-    for (var i = 1; i <= 12; i++) {
-        var eId = "cat" + i;
-        document.getElementById(eId).innerHTML = "CATEGORY";
-    }
-    initializeCategoryArray();
-    setTimer(120);
-    timerStop = true;
-}
+// event listener for click to generate letter
+app.$roll.on('click', function(){
+    app.generateLetter();
+});
 
-// Purpose: to reset all of the category options to pick from
-function initializeCategoryArray() {
-    categories = ["Items found in the kitchen",
+// initialize the category array
+app.initializeCategoryArray = () => {
+    app.categories = ["Items found in the kitchen",
         "Item found in the backyard",
         "Word that ends in 'n'",
         "Musicians",
@@ -176,108 +192,144 @@ function initializeCategoryArray() {
         "Things homemade",
         "States"
     ];
-    return categories;
 }
 
-// To keep track off how long the category array is
-var numCategoriesLeft;
+// check categories array for enough remaining categories
+app.checkCategories = () => {
+    app.categoriesLeft = 0;
+    for (let i = 0; i < app.categories.length; i++) {
+        if (app.categories[i] === false) {
+            app.categoriesLeft++;
+        }
+    }
+}
 
-// Purpose: to generate the 12 categories for the game
-function generateCategories() {
-    checkCategories();
-    for (var i = 0; i < 12; i++) {
-        if (numCategoriesLeft > (categories.length - 12)) {
-            alert("No more available categories!");
+// set the timer
+app.setTimer = (timeInput) => {
+    app.timerStop = true;
+    app.$countdown.text(timeInput);
+    app.$timerSet = 'Set';
+    console.log('time set');
+}
+
+// generate categories for the board
+app.generateCategories = () => {
+    app.checkCategories();
+    for (let i = 0; i < 12; i++) {
+        // error check for not enough categories left
+        if (app.categoriesLeft > (app.categories.length - 12)) {
+            // insert error message
+            alert('There are no more categories left');
             break;
         }
-        var catIndex = Math.floor(Math.random() * categories.length);
-        while (categories[catIndex] === false) {
-            var catIndex2 = Math.floor(Math.random() * categories.length);
-            catIndex = catIndex2;
+
+        // generate random index for category
+        let categoryIndex = Math.floor(Math.random() * app.categories.length);
+
+        // error checking to generate a category
+        while (app.categories[categoryIndex] === false) {
+            let categoryIndex2 = Math.floor(Math.random() * app.categories.length);
+            categoryIndex = categoryIndex2;
         }
-        var category = categories[catIndex];
-        var catId = "cat" + (i + 1);
-        document.getElementById(catId).innerHTML = category;
-        categories[catIndex] = false;
+
+        // display the category on the game board
+        let category = app.categories[categoryIndex];
+        let categoryId = 'cat' + (i + 1);
+        $(`#${categoryId}`).text(category);
+
+        // remove category from the array
+        app.categories[categoryIndex] = false;
     }
-    setTimer(120);
+    // reset the timer to the default 120 seconds
+    app.setTimer(app.time);
 }
 
-// Purpose: to check if there are enough categories to run another game
-function checkCategories() {
-    numCategoriesLeft = 0;
-    for (var i = 0; i < categories.length; i++) {
-        if (categories[i] === false) {
-            numCategoriesLeft++;
-        }
-    }
-}
-
-// timerStop tells JS if the game timer should stop
-var timerStop = false;
-
-// Purpose: to reset the countdown to the default
-function setTimer(timeLeft) {
-    document.getElementById("countdown").innerHTML = timeLeft;
-    timerStop = true;
-    document.getElementById("timer-set").innerHTML = "Set";
-    document.getElementById("play-stop").innerHTML = "Play";
-}
-
-// Purpose: this is the main game logic while the game is running
-function startGame(timeLeft) {
-    timesClicked++;
-    if (document.getElementById("letter").innerHTML === "?") {
-        generateLetter('letter');
-    }
-    if (document.getElementById("cat1").innerHTML === "CATEGORY") {
-        generateCategories();
-    } else if (document.getElementById("cat1").innerHTML === "DONE!") {
-        generateLetter('letter');
-    }
-    if (timesClicked % 2 === 0) {
-        setTimer(120);
-    } else {
-        generateCategories();
-        document.getElementById("timer-set").innerHTML = "Stop";
-        document.getElementById("play-stop").innerHTML = "Stop";
-        timerStop = false;
-        var timer = setInterval(function() {
-            if (timerStop === true) {
-                clearInterval(timer);
-                timeLeft = 120;
-            }
-            if (timeLeft === 0) {
-                document.getElementById("countdown").innerHTML = timeLeft;
-                timerStop = true;
-                document.getElementById("countdown").innerHTML = "Finished!";
-                for (var i = 0; i < 12; i++) {
-                   var catId = "cat" + (i + 1);
-                   document.getElementById(catId).innerHTML = "DONE!";
-                }
-                var i = 0;
-                do {
-                    var playerId = "player" + (i + 1) + "Name";
-                    var currentPlayer = document.getElementById(playerId);
-                    if (currentPlayer.classList.contains("hide")) {
-                        break;
-                    }
-                    var playerName = currentPlayer.innerHTML;
-                    var newScore = Number(prompt("Enter " + playerName + "'s score:"));
-                    var scoreId = "player" + (i + 1) + "Score";
-                    var prevScore = Number(document.getElementById(scoreId).innerHTML);
-                    playerList[i].score = (newScore + prevScore);
-                    document.getElementById(scoreId).innerHTML = playerList[i].score;
-                    i++;
-                } while (i < playerCount);
-                clearInterval(timer);
+// main game logic
+app.startGame = () => {
+    app.$play.on('click', function() {
+        if (app.gameLive === false) {
+            // change the game state
+            app.gameLive = true;
+            // adjust the text on screen
+            app.$play.html('<a href="javascript:void(0)" id="play-stop">Stop</a>');
+            // generate letters and categories
+            if (app.letterRolled === false) {
+                app.generateLetter();
             } else {
-                document.getElementById("countdown").innerHTML = timeLeft;
+                app.letterRolled = false;
             }
-            if (timerStop === true) {
-                setTimer(120);
-            }
-        timeLeft -= 1;
-        }, 1000);
-    }
+            app.generateCategories();
+            // remove times-up class
+            app.$countdown.removeClass('times-up');
+            // set the time
+            let timeLeft = app.time;
+            // game timer and main game loop
+            app.timer = setInterval(function() {
+                // stop the timer if game state has been changed
+                if (app.gameLive === false) {
+                    app.gameStop();
+                } else { // if the game is live
+                    // if the time has run out
+                    if (timeLeft <= 0) {
+                        // adjust text on screen
+                        app.$countdown.text("Time's Up!").toggleClass('times-up');
+                        // stop game
+                        app.gameStop();
+                    } else { // if the game is still running
+                        // decrement and update displayed time
+                        timeLeft--;
+                        app.$countdown.text(`${timeLeft}`);   
+                    }                
+                }
+            }, 1000);
+        } else {
+            app.gameLive = false;
+            app.$play.html('<a href="javascript:void(0)" id="play-stop">Play</a>')
+            app.setTimer(app.time);
+        }
+    })
 }
+
+// reset the game board
+app.resetBoard = () => {
+    $('.reset').on('click', function() {
+        app.gameStop();
+        app.$countdown.removeClass('times-up');
+        app.setTimer(app.time);
+        app.$letter.text('?');
+    });
+}
+
+app.timeUp = () => {
+    $('.time-up').on('click', () => {
+        app.time += 10;
+        app.$countdown.text(app.time);
+    })
+}
+
+app.timeDown = () => {
+    $('.time-down').on('click', () => {
+        app.time -= 10;
+        app.$countdown.text(app.time);
+    })
+}
+
+// helper function to stop the game
+app.gameStop = () => {
+    app.gameLive = false;
+    app.letterRolled = false;
+    app.$play.html('<a href="javascript:void(0)" id="play-stop">Play</a>');
+    clearInterval(app.timer);
+}
+
+app.init = () => {
+    app.resetBoard();
+    app.initializeCategoryArray();
+    app.startGame(app.time);
+    app.timeUp();
+    app.timeDown();
+}
+
+$(function() {
+    app.init();
+});

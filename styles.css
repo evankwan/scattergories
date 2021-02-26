@@ -39,7 +39,7 @@ main {
 .play-background {
     height: 100%;
     border-radius: 10px;
-    background: rgb(44, 45, 48) url("images/stripes.jpg") top left repeat fixed;
+    /* background: rgb(44, 45, 48) url("images/stripes.jpg") top left repeat fixed; */
 }
 
 h1 {
@@ -101,6 +101,7 @@ a {
 
 .roll {
     color: rgb(220, 220, 220); 
+    cursor: pointer;
 }
 
 .info-title {
@@ -113,11 +114,6 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-/* Only styling is font-weight, all other font styling is inherited in wrap class */
-#letter {
-     /* For some reason this does not inherit default automatically */
 }
 
 .letter {
@@ -154,13 +150,7 @@ a {
 }
 
 .countdown-set {
-    visibility: hidden;
     color: rgb(220, 220, 220);
-}
-
-/* Only styling is font-weight, all other font styling is inherited in wrap class */
-#countdown {
- /* For some reason this does not inherit default automatically */
 }
 
 .countdown {
@@ -195,10 +185,15 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .reset:hover {
     color: gold;
+}
+
+.times-up {
+    font-size: 3rem;
 }
 
 @media (max-width: 1024px) {

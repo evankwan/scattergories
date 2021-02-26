@@ -10,7 +10,7 @@ app.categoriesLeft;
 app.timerStop = false;
 app.gameLive = false;
 app.timer;
-app.time = 10;
+app.time = 120;
 app.letterRolled = false;
 
 // cache selectors
@@ -19,8 +19,10 @@ app.$timerSet = $('#timer-set');
 app.$countdown = $('#countdown');
 app.$letter = $('#letter');
 app.$category1 = $('#cat1');
-app.$play = $('#play');
-app.$reset = $('#reset-link');
+app.$play = $('.play-wrap');
+app.$reset = $('.reset');
+app.$timerUp = $('.time-up');
+app.$timerDown = $('.time-down');
 
 // adding the time to the page
 app.$countdown.text(app.time);
@@ -208,8 +210,6 @@ app.checkCategories = () => {
 app.setTimer = (timeInput) => {
     app.timerStop = true;
     app.$countdown.text(timeInput);
-    app.$timerSet = 'Set';
-    console.log('time set');
 }
 
 // generate categories for the board
@@ -251,7 +251,7 @@ app.startGame = () => {
             // change the game state
             app.gameLive = true;
             // adjust the text on screen
-            app.$play.html('<a href="javascript:void(0)" id="play-stop">Stop</a>');
+            app.$play.html('<h2 id="play" class="play">Stop</h2>');
             // generate letters and categories
             if (app.letterRolled === false) {
                 app.generateLetter();
@@ -272,7 +272,7 @@ app.startGame = () => {
                     // if the time has run out
                     if (timeLeft <= 0) {
                         // adjust text on screen
-                        app.$countdown.text("Time's Up!").toggleClass('times-up');
+                        app.$countdown.text("Time's Up!").addClass('times-up');
                         // stop game
                         app.gameStop();
                     } else { // if the game is still running
@@ -284,7 +284,7 @@ app.startGame = () => {
             }, 1000);
         } else {
             app.gameLive = false;
-            app.$play.html('<a href="javascript:void(0)" id="play-stop">Play</a>')
+            app.$play.html('<h2 id="play" class="play">Play</h2>')
             app.setTimer(app.time);
         }
     })
@@ -292,7 +292,7 @@ app.startGame = () => {
 
 // reset the game board
 app.resetBoard = () => {
-    $('.reset').on('click', function() {
+    app.$reset.on('click', function() {
         app.gameStop();
         app.$countdown.removeClass('times-up');
         app.setTimer(app.time);
@@ -301,16 +301,18 @@ app.resetBoard = () => {
 }
 
 app.timeUp = () => {
-    $('.time-up').on('click', () => {
+    app.$timerUp.on('click', () => {
         app.time += 10;
         app.$countdown.text(app.time);
     })
 }
 
 app.timeDown = () => {
-    $('.time-down').on('click', () => {
-        app.time -= 10;
-        app.$countdown.text(app.time);
+    app.$timerDown.on('click', () => {
+        if (app.time > 10) {
+            app.time -= 10;
+            app.$countdown.text(app.time);
+        }       
     })
 }
 
@@ -318,7 +320,7 @@ app.timeDown = () => {
 app.gameStop = () => {
     app.gameLive = false;
     app.letterRolled = false;
-    app.$play.html('<a href="javascript:void(0)" id="play-stop">Play</a>');
+    app.$play.html('<h2 id="play" class="play">Play</h2>');
     clearInterval(app.timer);
 }
 

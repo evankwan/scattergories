@@ -151,6 +151,11 @@ a {
 
 .countdown-set {
     color: rgb(220, 220, 220);
+    cursor: pointer;
+}
+
+.play {
+    font-size: 3rem;
 }
 
 .countdown {

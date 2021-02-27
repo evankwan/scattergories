@@ -7,7 +7,6 @@ app.categories;
 
 // global variables
 app.categoriesLeft;
-app.timerStop = false;
 app.gameLive = false;
 app.timer;
 app.time = 120;
@@ -29,6 +28,10 @@ app.$countdown.text(app.time);
 
 // generate a letter for the game
 app.generateLetter = () => {
+    if (app.gameLive === true) {
+        app.gameStop();
+        app.setTimer(app.time);
+    }
     // retrieve a letter from the letters array
     let index = Math.floor(Math.random() * app.letters.length);
     let letterDisplayed = app.letters[index];
@@ -208,7 +211,7 @@ app.checkCategories = () => {
 
 // set the timer
 app.setTimer = (timeInput) => {
-    app.timerStop = true;
+    app.gameLive = false;
     app.$countdown.text(timeInput);
 }
 
@@ -248,17 +251,18 @@ app.generateCategories = () => {
 app.startGame = () => {
     app.$play.on('click', function() {
         if (app.gameLive === false) {
-            // change the game state
-            app.gameLive = true;
-            // adjust the text on screen
-            app.$play.html('<h2 id="play" class="play">Stop</h2>');
-            // generate letters and categories
+            // logic to roll letter and categories
             if (app.letterRolled === false) {
                 app.generateLetter();
             } else {
                 app.letterRolled = false;
-            }
+            } 
             app.generateCategories();
+            // change the game state
+            app.gameLive = true;
+            // adjust the text on screen
+            app.$play.html('<h2 id="play" class="play">Stop</h2>');
+            
             // remove times-up class
             app.$countdown.removeClass('times-up');
             // set the time

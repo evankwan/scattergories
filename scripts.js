@@ -42,160 +42,197 @@ app.generateLetter = () => {
 }
 
 // event listener for click to generate letter
-app.$roll.on('click', function(){
+app.$roll.on('click', function () {
     app.generateLetter();
 });
 
 // initialize the category array
 app.initializeCategoryArray = () => {
     app.categories = ["Items found in the kitchen",
-        "Item found in the backyard",
-        "Word that ends in 'n'",
-        "Musicians",
-        "TV Shows",
-        "Movies",
-        "Video Games",
-        "Junk food",
-        "Fast food items",
-        "City names",
-        "A type of drink",
-        "Pizza toppings",
-        "Insect",
-        "Animals",
-        "Something you drive",
-        "Sea creatures",
-        "A girls name",
-        "A boys name",
-        "Somewhere you spend money",
-        "Countries",
-        "Birds",
-        "Fish",
-        "Farm Animals",
-        "Pets",
-        "Colors",
-        "Artists",
-        "Types of art",
-        "Medical terms",
-        "Office items",
-        "Areas of study",
-        "Clothing items",
-        "Kids TV Shows",
-        "Male actors",
-        "Female actors",
-        "Comedy movies",
-        "Sport teams",
-        "Sport terms",
-        "Athletes",
-        "Olympic/Paralympic sports",
-        "Water sports",
-        "Breakfast foods",
-        "Chinese food",
-        "Dairy products",
-        "Spices/Herbs",
-        "Flowers",
-        "Plants",
-        "Trees",
-        "Things made of wood",
-        "Vegetables and fruits",
-        "Capital cities",
-        "Lakes",
-        "Politicians",
-        "War terms",
-        "Holidays",
-        "Christmas songs",
-        "TV or movie characters",
-        "Pieces of furniture",
-        "House decorations",
-        "Kitchen appliances",
-        "Music terms",
-        "Genres of music",
-        "Authors",
-        "Classic books",
-        "Characters from books",
-        "Mythology terms/creatures",
-        "Something Greek",
-        "Something Italian",
-        "Something Spanish",
-        "Something Canadian",
-        "Something American",
-        "Female singers",
-        "Male singers",
-        "Love songs",
-        "Musical intruments",
-        "Songs with a name in the title",
-        "Band names",
-        "Pop stars",
-        "Chemicals",
-        "Drug names",
-        "Gems",
-        "Metals",
-        "Types of rock",
-        "Weather terms",
-        "Tech companies",
-        "Company names",
-        "Food companies",
-        "Restaurant names",
-        "Things that are cold",
-        "Things that are hot",
-        "Things that are flat",
-        "Things that are square",
-        "Things that are round",
-        "Brands that are a part of regular speech",
-        "Things in the medicine cabinet",
-        "Things in a park",
-        "Things made of glass",
-        "Things made of plastic",
-        "Things made of metal",
-        "Things that are yellow",
-        "Things that are blue",
-        "Things that are red",
-        "Things that are sticky",
-        "Things that are scary",
-        "Futuristic inventions",
-        "Things that are expensive",
-        "Things that are cheap",
-        "Things found at a circus",
-        "Things that burn",
-        "Things that are fragile",
-        "Things that are big",
-        "Things that are small",
-        "Things that have spots or stripes",
-        "Things that have wheels",
-        "Car terms",
-        "Things that smell bad",
-        "Things that smell good",
-        "Tools",
-        "Renovation terms",
-        "Board games",
-        "Hobbies",
-        "Things found in a bar",
-        "Toys",
-        "Airplane or airport terms",
-        "Travel terms",
-        "Diet terms",
-        "Product names",
-        "Beers",
-        "Wine terms",
-        "Offensive words",
-        "Items found in a purse/wallet",
-        "Vacation spots",
-        "Terms of Measurement",
-        "Honeymoon spots",
-        "Computer programs",
-        "Card games",
-        "Things you shouldn't touch",
-        "Pizza toppings",
-        "Terms of endearment",
-        "Nicknames",
-        "Seafood",
-        "Awards",
-        "Menu items",
-        "Exercise terms",
-        "Winter terms",
-        "U.S. Cities",
-        "Animals with tails",
-        "Things homemade",
-        "States"
+        // "Item found in the backyard",
+        // "Word that ends in 'n'",
+        // "Musicians",
+        // "TV Shows",
+        // "Movies",
+        // "Video Games",
+        // "Junk food",
+        // "Fast food items",
+        // "City names",
+        // "A type of drink",
+        // "Pizza toppings",
+        // "Insect",
+        // "Animals",
+        // "Something you drive",
+        // "Sea creatures",
+        // "A girls name",
+        // "A boys name",
+        // "Somewhere you spend money",
+        // "Countries",
+        // "Birds",
+        // "Fish",
+        // "Farm Animals",
+        // "Pets",
+        // "Colors",
+        // "Artists",
+        // "Types of art",
+        // "Medical terms",
+        // "Office items",
+        // "Areas of study",
+        // "Clothing items",
+        // "Kids TV Shows",
+        // "Male actors",
+        // "Female actors",
+        // "Comedy movies",
+        // "Sport teams",
+        // "Sport terms",
+        // "Athletes",
+        // "Olympic/Paralympic sports",
+        // "Water sports",
+        // "Breakfast foods",
+        // "Chinese food",
+        // "Dairy products",
+        // "Spices/Herbs",
+        // "Flowers",
+        // "Plants",
+        // "Trees",
+        // "Things made of wood",
+        // "Vegetables and fruits",
+        // "Capital cities",
+        // "Lakes",
+        // "Politicians",
+        // "War terms",
+        // "Holidays",
+        // "Christmas songs",
+        // "TV or movie characters",
+        // "Pieces of furniture",
+        // "House decorations",
+        // "Kitchen appliances",
+        // "Music terms",
+        // "Genres of music",
+        // "Authors",
+        // "Classic books",
+        // "Characters from books",
+        // "Mythology terms/creatures",
+        // "Something Greek",
+        // "Something Italian",
+        // "Something Spanish",
+        // "Something Canadian",
+        // "Something American",
+        // "Female singers",
+        // "Male singers",
+        // "Love songs",
+        // "Musical intruments",
+        // "Songs with a name in the title",
+        // "Band names",
+        // "Pop stars",
+        // "Chemicals",
+        // "Drug names",
+        // "Gems",
+        // "Metals",
+        // "Types of rock",
+        // "Weather terms",
+        // "Tech companies",
+        // "Company names",
+        // "Food companies",
+        // "Restaurant names",
+        // "Things that are cold",
+        // "Things that are hot",
+        // "Things that are flat",
+        // "Things that are square",
+        // "Things that are round",
+        // "Brands that are a part of regular speech",
+        // "Things in the medicine cabinet",
+        // "Things in a park",
+        // "Things made of glass",
+        // "Things made of plastic",
+        // "Things made of metal",
+        // "Things that are yellow",
+        // "Things that are blue",
+        // "Things that are red",
+        // "Things that are sticky",
+        // "Things that are scary",
+        // "Futuristic inventions",
+        // "Things that are expensive",
+        // "Things that are cheap",
+        // "Things found at a circus",
+        // "Things that burn",
+        // "Things that are fragile",
+        // "Things that are big",
+        // "Things that are small",
+        // "Things that have spots or stripes",
+        // "Things that have wheels",
+        // "Car terms",
+        // "Things that smell bad",
+        // "Things that smell good",
+        // "Tools",
+        // "Renovation terms",
+        // "Board games",
+        // "Hobbies",
+        // "Things found in a bar",
+        // "Toys",
+        // "Airplane or airport terms",
+        // "Travel terms",
+        // "Diet terms",
+        // "Product names",
+        // "Beers",
+        // "Wine terms",
+        // "Offensive words",
+        // "Items found in a purse/wallet",
+        // "Vacation spots",
+        // "Terms of Measurement",
+        // "Honeymoon spots",
+        // "Computer programs",
+        // "Card games",
+        // "Things you shouldn't touch",
+        // "Pizza toppings",
+        // "Terms of endearment",
+        // "Nicknames",
+        // "Seafood",
+        // "Awards",
+        // "Menu items",
+        // "Exercise terms",
+        // "Winter terms",
+        // "U.S. Cities",
+        // "Animals with tails",
+        // "Things homemade",
+        // "States",
+        // // Christmas Themes
+        "Holiday songs",
+        "Elf names",
+        "Holiday foods",
+        "Holiday activities",
+        "Winter activities",
+        "Things to do with Santa",
+        "Holiday traditions",
+        "Stocking stuffers",
+        "Holiday decorations",
+        "Winter clothing",
+        "Winter drinks",
+        "Elf jobs",
+        "Winter flavours",
+        "Holiday movies",
+        "Snow day activities",
+        "Holiday characters",
+        "On a gingerbread house",
+        "Words that rhyme with 'ice'",
+        "Winter sports",
+        "Items that remind you of winter",
+        "Things you put in hot chocolate",
+        "Something cozy",
+        "Something warm",
+        "Something on a christmas tree",
+        "Songs that mention snow",
+        "New years resolutions",
+        "New years traditions",
+        "Holiday symbols",
+        "Type of candy",
+        "Something white",
+        "Something green",
+        "Something red",
+        "Something festive",
+        "Festive cookies",
+        "Things at a family gathering",
+        "Ways to stay warm"
     ];
 }
 
@@ -249,26 +286,26 @@ app.generateCategories = () => {
 
 // main game logic
 app.startGame = () => {
-    app.$play.on('click', function() {
+    app.$play.on('click', () => {
         if (app.gameLive === false) {
             // logic to roll letter and categories
             if (app.letterRolled === false) {
                 app.generateLetter();
             } else {
                 app.letterRolled = false;
-            } 
+            }
             app.generateCategories();
             // change the game state
             app.gameLive = true;
             // adjust the text on screen
             app.$play.html('<h2 id="play" class="play">Stop</h2>');
-            
+
             // remove times-up class
             app.$countdown.removeClass('times-up');
             // set the time
             let timeLeft = app.time;
             // game timer and main game loop
-            app.timer = setInterval(function() {
+            app.timer = setInterval(() => {
                 // stop the timer if game state has been changed
                 if (app.gameLive === false) {
                     app.gameStop();
@@ -282,8 +319,8 @@ app.startGame = () => {
                     } else { // if the game is still running
                         // decrement and update displayed time
                         timeLeft--;
-                        app.$countdown.text(`${timeLeft}`);   
-                    }                
+                        app.$countdown.text(`${timeLeft}`);
+                    }
                 }
             }, 1000);
         } else {
@@ -296,7 +333,7 @@ app.startGame = () => {
 
 // reset the game board
 app.resetBoard = () => {
-    app.$reset.on('click', function() {
+    app.$reset.on('click', () => {
         app.gameStop();
         app.$countdown.removeClass('times-up');
         app.setTimer(app.time);
@@ -316,7 +353,7 @@ app.timeDown = () => {
         if (app.time > 10) {
             app.time -= 10;
             app.$countdown.text(app.time);
-        }       
+        }
     })
 }
 
@@ -336,6 +373,6 @@ app.init = () => {
     app.timeDown();
 }
 
-$(function() {
+$(() => {
     app.init();
 });

@@ -411,16 +411,6 @@ a {
     font-weight: 400;
 }
 
-.letter,
-.countdown:hover {
-    color: lawngreen;
-}
-
-.countdown,
-.letter:hover {
-    color: red;
-}
-
 .countdown-wrap {
     height: 60%;
     border-bottom: 2px solid white;
@@ -441,14 +431,6 @@ a {
 .categories ol {
     justify-content: space-around;
     font-size: 1.5rem;
-}
-
-.categories ol li:nth-child(odd) {
-    color: red;
-}
-
-.categories ol li:nth-child(even) {
-    color: lawngreen;
 }
 
 .reset {
